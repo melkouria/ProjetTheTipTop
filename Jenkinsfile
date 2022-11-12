@@ -34,7 +34,9 @@ pipeline {
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {     
                         checkout scm       
                                    
-                        app.push("latest")        
+                        app.push("latest")    
+                         sh 'echo "list workspace"'
+
               }
                 }
             }
