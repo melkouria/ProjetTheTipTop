@@ -16,7 +16,7 @@ pipeline {
         stage("Build image") {
             steps {
                 script {
-                    myapp = docker.build("/tmp/Desktop/final/projetthetiptop/backend:${env.BUILD_ID}")
+                    myapp = docker.build("/Desktop/final/projetthetiptop/backend:${env.BUILD_ID}")
                 }
             }
         }
