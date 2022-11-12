@@ -11,13 +11,15 @@ pipeline {
         stage("Checkout code") {
             steps {
                 checkout scm
+                sh 'echo "list workspace"'
+                sh 'ls -lah'
             }
         }
         stage("Build front  image") {
             steps {
                 script {
-                    sh 'cd Backend'
-                    myapp = docker.build  ('elkouria/backend')
+                    sh 'cd ./Backend'
+                    myapp = docker.build('elkouria/backend')
                 }
             }
         }
