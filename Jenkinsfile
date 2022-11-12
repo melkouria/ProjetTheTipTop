@@ -33,8 +33,11 @@ pipeline {
 
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {     
                         checkout scm       
-                          sh 'echo "list workspace"'
-                        app.push("myapp")    
+                          
+                           app.push("${env.BUILD_NUMBER}")     
+                         sh 'echo "list workspace"'
+                            app.push("latest")  
+                          
                          sh 'echo "list workspace"'
 
               }
