@@ -1,0 +1,24 @@
+
+<app-client></app-client>
+<div style="margin-left: 50px;" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" >
+    <div fxFlex="60" >
+        <table id="customers" style="margin-left: 340px; margin-top: 150px;" >
+            <h2 style="text-align: center ;margin-left: 340px;">Reclamation Clients</h2>
+            <tr >
+              <th>Nom</th>
+              <th>Prenom</th>
+              <th>Email</th>
+              <th>Telephone</th>
+              <th>Reclamation</th>
+            </tr>
+            <tr *ngFor="let e of emails">
+              <td>{{e.nom}}</td>
+              <td>{{e.prenom }}</td>
+              <td>{{e.email }}</td>
+              <td>{{e.telephone }}</td>
+              <td>{{e.mesage }}</td>
+            </tr>
+           
+          </table> 
+        
+</div>
