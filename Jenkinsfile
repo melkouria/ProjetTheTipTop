@@ -16,10 +16,12 @@ pipeline {
         stage("Build front  image") {
             steps {
                 script {
-                    myapp = docker.build('elkouria/backendapi')
+                    sh 'cd Backend'
+                    myapp = docker.build  ('elkouria/backend')
                 }
             }
         }
+
         stage("Push image") {
             steps {
                 script {
