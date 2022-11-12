@@ -19,7 +19,7 @@ pipeline {
             steps {
                 script {
                     dir('Backend'){
-                    myapp = docker.build('elkouria/backend')
+                    myapp = docker.build('elkouria/backend:latest')
                     }
                     
                 }
@@ -30,10 +30,10 @@ pipeline {
             steps {
                 script {
                     sh 'pwd'
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerID') {
-                            myapp.push("latest")
-                            myapp.push("${env.BUILD_ID}")
-                    }
+                    docker.withRegistry('https://registry.hub.docker.com', 'git') {            
+                        app.push("${env.BUILD_NUMBER}")            
+                        app.push("latest")        
+              }
                 }
             }
         }        
