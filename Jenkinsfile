@@ -33,7 +33,7 @@ pipeline {
                      dir('Backend'){
                         docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                            sh 'docker images'    
-                          
+                          sh 'docker tag backend elkouria/backend'
                           sh 'docker push elkouria/backend:latest'
               }
                      }
