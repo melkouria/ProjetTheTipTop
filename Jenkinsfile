@@ -19,7 +19,7 @@ pipeline {
             steps {
                 script {
                     dir('Backend'){
-                    myapp = docker.build('elkouria/backend:${env.BUILD_ID}')
+                    myapp = docker.build('elkouria/backend:latest')
                     }
                     
                 }
