@@ -16,7 +16,7 @@ pipeline {
         stage("Build image") {
             steps {
                 script {
-                    myapp = docker.build('elkouria/backend:latest')
+                    myapp = docker.build('elkouria/backend:latest/Dockerfile')
                 }
             }
         }
