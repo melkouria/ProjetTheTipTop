@@ -19,7 +19,8 @@ pipeline {
             steps {
                 script {
                     dir('Backend'){
-                    myapp = docker.build('elkouria/backend:latest')
+                    sh'docker build -t elkouria/backend:latest'
+                    
                     }
                     
                 }
@@ -30,9 +31,11 @@ pipeline {
             steps {
                 script {
                      dir('Backend'){
-                          sh 'docker ps'    
+                        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                           sh 'docker images'    
                           sh 'docker tag backendapi elkouria/backend'
                           sh 'docker push elkouria/backend:latest'
+              }
                      }
                     
                 }
