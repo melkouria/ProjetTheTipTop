@@ -32,8 +32,9 @@ pipeline {
                    
                     sh 'pwd'
 
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {            
-                        app.push("${env.BUILD_ID}")            
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {    
+                                
+                         
                         app.push("latest")        
               }
                     
