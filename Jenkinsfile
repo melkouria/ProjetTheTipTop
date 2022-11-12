@@ -19,7 +19,7 @@ pipeline {
             steps {
                 script {
                     dir('Backend'){
-                    sh'docker build -t elkouria/backend:latest'
+                    sh'docker build -t elkouria/backend:latest .'
                     
                     }
                     
