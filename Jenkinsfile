@@ -19,6 +19,7 @@ pipeline {
             steps {
                 script {
                     sh 'cd ./Backend'
+                    sh 'pwd'
                     myapp = docker.build('elkouria/backend')
                 }
             }
