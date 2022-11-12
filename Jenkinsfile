@@ -30,12 +30,14 @@ pipeline {
             steps {
                 script {
                     sh 'pwd'
-                           app.push("${env.BUILD_ID}")
-                              
+
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerID') {            
+                        app.push("${env.BUILD_ID}")            
+                        app.push("latest")        
               }
                 }
             }
-              
+        }        
         stage('Deploy to GKE') {
             steps{
                 sh "sed -i 's/backend:latest/backend:${env.BUILD_ID}/g' deployment.yaml"
