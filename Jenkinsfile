@@ -19,7 +19,7 @@ pipeline {
             steps {
                 script {
                     dir('Backend'){
-                    myapp = docker.build('elkouria/backend:latest')
+                    myapp = docker.build('elkouria/backend:${env.BUILD_ID}')
                     }
                     
                 }
@@ -30,13 +30,12 @@ pipeline {
             steps {
                 script {
                     sh 'pwd'
-                    docker.withRegistry('https://registry.hub.docker.com', 'git') {            
-                        app.push("${env.BUILD_NUMBER}")            
-                        app.push("latest")        
+                           app.push("${env.BUILD_ID}")
+                              
               }
                 }
             }
-        }        
+              
         stage('Deploy to GKE') {
             steps{
                 sh "sed -i 's/backend:latest/backend:${env.BUILD_ID}/g' deployment.yaml"
