@@ -31,7 +31,7 @@ pipeline {
                 script {
                     sh 'pwd'
 
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerID') {     
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {     
                         checkout scm       
                                    
                         app.push("latest")        
