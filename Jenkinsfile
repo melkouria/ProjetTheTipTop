@@ -30,11 +30,9 @@ pipeline {
             steps {
                 script {
                      dir('Backend'){
-                        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                           sh 'docker ps'    
+                          sh 'docker ps'    
                           sh 'docker tag backendapi elkouria/backend'
                           sh 'docker push elkouria/backend:latest'
-              }
                      }
                     
                 }
