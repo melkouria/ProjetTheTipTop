@@ -29,11 +29,14 @@ pipeline {
         stage("Push image") {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                     dir('Backend'){
+                        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                            sh 'docker ps'    
                           sh 'docker tag backendapi elkouria/backend'
                           sh 'docker push elkouria/backend:latest'
               }
+                     }
+                    
                 }
             }
         }        
