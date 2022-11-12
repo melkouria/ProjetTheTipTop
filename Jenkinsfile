@@ -29,12 +29,14 @@ pipeline {
         stage("Push image") {
             steps {
                 script {
+                    dir('Backend'){
                     sh 'pwd'
 
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerID') {            
                         app.push("${env.BUILD_ID}")            
                         app.push("latest")        
               }
+                    }
                 }
             }
         }        
