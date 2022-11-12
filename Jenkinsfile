@@ -13,10 +13,10 @@ pipeline {
                 checkout scm
             }
         }
-        stage("Build image") {
+        stage("Build front  image") {
             steps {
                 script {
-                    myapp = docker.build  ('elkouria/backend:latest')
+                    myapp = docker.build('elkouria/backendapi')
                 }
             }
         }
