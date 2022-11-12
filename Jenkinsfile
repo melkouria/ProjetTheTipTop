@@ -45,14 +45,11 @@ pipeline {
         }        
         stage('Deploy to GKE') {
             steps{
-                script{
-                      dir('Backend'){
+                 dir('Backend'){
                     sh "sed -i 's/backend:latest/backend:${env.BUILD_ID}/g' deployment.yaml"
                     
-                kubernetesDeploy(configs:'deployment.yaml', kubconfigID: env.CREDENTIALS_ID)
+                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
                  }
-                }
-               
                 
             }
         }
