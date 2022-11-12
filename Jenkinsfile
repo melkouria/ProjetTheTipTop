@@ -18,9 +18,11 @@ pipeline {
         stage("Build front  image") {
             steps {
                 script {
-                    sh 'cd ./Backend'
+                    dir('Backend'){
                     sh 'pwd'
                     myapp = docker.build('elkouria/backend')
+                    }
+                    
                 }
             }
         }
