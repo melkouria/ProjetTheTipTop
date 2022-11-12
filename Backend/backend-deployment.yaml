@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
       - name: backend
-        image: elkouria/backend
+        image: elkouria/backend:latest
         ports:
         - containerPort: 7777
