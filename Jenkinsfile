@@ -35,7 +35,7 @@ pipeline {
                            sh 'docker images'
                            sh 'docker login -u elkouria -p Kouria1996'    
                           sh 'docker tag backend elkouria/backend'
-                          sh 'docker push elkouria/backend'
+                          sh 'docker push elkouria/backend:backend'
               }
                      }
                     
