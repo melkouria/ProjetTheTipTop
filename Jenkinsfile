@@ -19,7 +19,6 @@ pipeline {
             steps {
                 script {
                     dir('Backend'){
-                    sh 'sudo usermod -a -G docker jenkins'
                     myapp = docker.build('elkouria/backend')
                     }
                     
