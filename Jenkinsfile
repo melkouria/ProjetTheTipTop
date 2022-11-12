@@ -5,7 +5,8 @@ pipeline {
         PROJECT_ID = 'regal-bonito-365811'
         CLUSTER_NAME = 'autopilot-cluster-1	'
         LOCATION = 'us-central1'
-        CREDENTIALS_ID = 'multi-k8s'
+        CREDENTIALS_ID = 'kubernetes'
+        
     }
     stages {
         stage("Checkout code") {
@@ -46,7 +47,7 @@ pipeline {
             steps{
                  dir('Backend'){
                     sh "sed -i 's/backend:latest/backend:${env.BUILD_ID}/g' deployment.yaml"
-                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId:kubernetes, verifyDeployments: true])
+                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
                  }
                 
             }
