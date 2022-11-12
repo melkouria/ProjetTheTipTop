@@ -31,8 +31,9 @@ pipeline {
                 script {
                     sh 'pwd'
 
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerID') {            
-                        app.push("${{env.myapp}}")            
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerID') {     
+                        checkout scm       
+                        app.push("${{env.BUILD_ID}}")            
                         app.push("latest")        
               }
                 }
