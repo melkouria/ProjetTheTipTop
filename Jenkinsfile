@@ -3,7 +3,7 @@ pipeline {
     agent any
     environment {
         PROJECT_ID = 'regal-bonito-365811'
-        CLUSTER_NAME = 'autopilot-cluster-1	'
+        CLUSTER_NAME = 'autopilot-cluster-1'
         LOCATION = 'us-central1'
         CREDENTIALS_ID = 'kubernetes'
         
@@ -47,8 +47,9 @@ pipeline {
             steps{
                  dir('Backend'){
                     sh "sed -i 's/backend:latest/backend:${env.BUILD_ID}/g' deployment.yaml"
-                    
-                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
+                    sh 'gcloud container clusters get-credentials autopilot-cluster-1 --region us-central1 --project regal-bonito-365811'
+
+                step([$class: 'KubernetesEngineBuilder', projectId: 'regal-bonito-365811' , clusterName:'autopilot-cluster-1', location: 'us-central1', manifestPattern: 'deployment.yaml', credentialsId: 'kubernetes', verifyDeployments: true])
                  }
                 
             }
