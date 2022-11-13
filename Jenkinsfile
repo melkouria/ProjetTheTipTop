@@ -25,7 +25,7 @@ pipeline {
                 }
             }
         }
-        stage("Build front image") {
+        stage("Build Frontend image") {
             steps {
                 script {
                     dir('frontend'){
@@ -51,7 +51,7 @@ pipeline {
                 }
             }
         }
-        stage("Push front image") {
+        stage("Push Frontend image") {
             steps {
                 script {
                      dir('frontend'){
@@ -66,7 +66,7 @@ pipeline {
                 }
             }
         }          
-        stage('Deploy to GKE') {
+        stage('Deploy Backend to GKE') {
             steps{
                  dir('Backend'){
                  sh "sed -i 's/backend:latest/backend:${env.BUILD_ID}/g' deployment.yaml"
@@ -74,6 +74,9 @@ pipeline {
                  }
                 
             }
+        }
+
+        stage('Deploy Frontend to GKE') {
             steps{
                  dir('frontend'){
                  sh "sed -i 's/backend:latest/front:${env.BUILD_ID}/g' deployment.yaml"
@@ -82,5 +85,6 @@ pipeline {
                 
             }
         }
+         
     }    
 }
