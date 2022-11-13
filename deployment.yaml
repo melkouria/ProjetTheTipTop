@@ -33,7 +33,7 @@ spec:
   - protocol: TCP
     port: 4100
     targetPort: 4100
-    nodePort: 31120
+    nodePort: 31130
 ---
 
 
@@ -72,5 +72,5 @@ spec:
   - protocol: TCP
     port: 7777
     targetPort: 7777
-    nodePort: 31110
+    nodePort: 31140
     
