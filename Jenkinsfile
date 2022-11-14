@@ -70,6 +70,7 @@ pipeline {
         stage('Deploy Backend and front to GKE') {
             steps{
                  sh "sed -i 's/backend:latest/backend:${env.BUILD_ID}/g' deployment.yaml"
+                 sh'gcloud container clusters get-credentials autopilot-cluster-1 --region us-central1 --project regal-bonito-365811'
                  step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
             }
                                
