@@ -70,7 +70,7 @@ pipeline {
         stage('Deploy Backend and front to GKE') {
             steps{
                  sh "sed -i 's/backend:latest/backend:${env.BUILD_ID}/g' deployment.yaml"
-                step([$class:'KubernetesEngineBuilder', projectId:'regal-bonito-365811' , clusterName:'autopilot-cluster-1', location: 'us-central1', manifestPattern:'deployment.yaml', credentialsId:'kubernete', verifyDeployments: true])                
+                step([$class:'KubernetesEngineBuilder', projectId:'regal-bonito-365811' , clusterName:'autopilot-cluster-1', location:'us-central1', manifestPattern:'deployment.yaml', credentialsId:'kubernete', verifyDeployments: true])                
             }
         }
     }    
