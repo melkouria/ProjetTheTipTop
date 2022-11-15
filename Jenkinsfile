@@ -44,7 +44,7 @@ pipeline {
                         docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                            sh 'docker images'
                            sh 'docker login -u elkouria -p Kouria1996' 
-                           sh 'docker pull jenkins/jenkins'   
+                           sh 'docker tag latest elkouria/backend:latest'  
                           sh 'docker pull elkouria/backend:latest'
                           sh 'docker push elkouria/backend:latest'
               }
@@ -60,7 +60,7 @@ pipeline {
                         docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                            sh 'docker images'
                            sh 'docker login -u elkouria -p Kouria1996' 
-                           sh 'docker pull jenkins/jenkins'   
+                             
                           sh 'docker pull elkouria/front:latest'
                           sh 'docker push elkouria/front:latest'
               }
