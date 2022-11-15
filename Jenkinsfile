@@ -18,7 +18,7 @@ pipeline {
             steps {
                 script {
                     dir('Backend'){
-                    sh'docker build -t elkouria/backend:latest1 .'
+                    sh'docker build -t elkouria/back:latest1 .'
                     sh 'docker login -u elkouria -p Kouria1996'
                     
                     }
@@ -30,7 +30,7 @@ pipeline {
             steps {
                 script {
                     dir('frontend'){
-                    sh'docker build -t elkouria/front:latest1 .'
+                    sh'docker build -t elkouria/frontend:latest1 .'
                     }
                     
                 }
