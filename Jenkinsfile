@@ -61,7 +61,7 @@ pipeline {
                            sh 'docker images'
                            sh 'docker login -u elkouria -p Kouria1996' 
                              
-                          sh 'docker pull elkouria/front:latest'
+                         
                           sh 'docker push elkouria/front:latest'
               }
                      }
