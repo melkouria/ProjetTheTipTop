@@ -44,7 +44,7 @@ pipeline {
                         docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                            sh 'docker images'
                            sh 'docker login -u elkouria -p Kouria1996' 
-                           sh 'docker tag latest elkouria/backend:latest'  
+                           sh 'docker tag latest elkouria/backend'  
                           sh 'docker pull elkouria/backend:latest'
                           sh 'docker push elkouria/backend:latest'
               }
