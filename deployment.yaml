@@ -33,7 +33,7 @@ spec:
   - protocol: TCP
     port: 4100
     targetPort: 4100
-    nodePort: 31130
+    nodePort: 31150
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -69,5 +69,5 @@ spec:
   - protocol: TCP
     port: 7777
     targetPort: 7777
-    nodePort: 31140
+    nodePort: 31160
     
