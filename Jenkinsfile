@@ -18,7 +18,7 @@ pipeline {
             steps {
                 script {
                     dir('Backend'){
-                    sh'docker build -t elkouria/back:latest1 .'
+                    sh'docker build -t elkouria/backend:latest .'
                     sh 'docker login -u elkouria -p Kouria1996'
                     
                     }
@@ -30,7 +30,7 @@ pipeline {
             steps {
                 script {
                     dir('frontend'){
-                    sh'docker build -t elkouria/frontend:latest1 .'
+                    sh'docker build -t elkouria/front:latest .'
                     }
                     
                 }
@@ -44,9 +44,9 @@ pipeline {
                         docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                            sh 'docker images'
                            sh 'docker login -u elkouria -p Kouria1996' 
-                            
-                         
-                          sh 'docker push elkouria/backend:latest1'
+                              
+                          sh 'docker pull elkouria/backend:latest'
+                          sh 'docker push elkouria/backend:latest'
               }
                      }
                     
@@ -61,8 +61,8 @@ pipeline {
                            sh 'docker images'
                            sh 'docker login -u elkouria -p Kouria1996' 
                              
-                         
-                          sh 'docker push elkouria/front:latest1'
+                          sh 'docker pull elkouria/front:latest'
+                          sh 'docker push elkouria/front:latest'
               }
                      }
                     

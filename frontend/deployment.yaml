@@ -2,22 +2,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: front-deployment
+  name: frontend-deployment
   labels:
-    app: front
+    app: frontend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: front
+      app: frontend
   template:
     metadata:
       labels:
-        app: front
+        app:  frontend
     spec:
       containers:
       - name: front
-        image: elkouria/front
+        image: elkouria/projectfront
         ports:
         - containerPort: 4100
 ---
@@ -27,7 +27,7 @@ metadata:
   name: front-service
 spec:
   selector:
-    app: front 
+    app:  frontend
   type: LoadBalancer
   ports:
   - protocol: TCP
