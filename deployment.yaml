@@ -1,4 +1,4 @@
-
+# kubectl explain deploy
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -6,7 +6,7 @@ metadata:
   labels:
     app: frontend
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: frontend
@@ -42,7 +42,7 @@ metadata:
   labels:
     app: backend
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: backend
