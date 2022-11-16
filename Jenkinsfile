@@ -3,7 +3,7 @@ pipeline {
     agent any
     environment {
         PROJECT_ID = 'regal-bonito-365811'
-        CLUSTER_NAME = 'autopilot-cluster-2'
+        CLUSTER_NAME = 'autopilot-cluster-3'
         LOCATION = 'us-central1'
         CREDENTIALS_ID = 'gcpkey'
         
@@ -18,7 +18,7 @@ pipeline {
             steps {
                 script {
                     dir('Backend'){
-                    sh'docker build -t elkouria/backend:latest .'
+                    sh'docker build -t elkouria/backend:latestF .'
                     sh 'docker login -u elkouria -p Kouria1996'
                     
                     }
@@ -30,7 +30,7 @@ pipeline {
             steps {
                 script {
                     dir('frontend'){
-                    sh'docker build -t elkouria/front:latest .'
+                    sh'docker build -t elkouria/frontend:latestF .'
                     }
                     
                 }
@@ -45,8 +45,8 @@ pipeline {
                            sh 'docker images'
                            sh 'docker login -u elkouria -p Kouria1996' 
                               
-                          sh 'docker pull elkouria/backend:latest'
-                          sh 'docker push elkouria/backend:latest'
+                          sh 'docker pull elkouria/backend:latestF'
+                          sh 'docker push elkouria/backend:latestF'
               }
                      }
                     
@@ -61,8 +61,8 @@ pipeline {
                            sh 'docker images'
                            sh 'docker login -u elkouria -p Kouria1996' 
                              
-                          sh 'docker pull elkouria/front:latest'
-                          sh 'docker push elkouria/front:latest'
+                          sh 'docker pull elkouria/frontend:latestF'
+                          sh 'docker push elkouria/frontend:latestF'
               }
                      }
                     
@@ -71,14 +71,14 @@ pipeline {
         }          
         stage('Deploy Backend  GKE') {
             steps{
-                 sh "sed -i 's/backend:latest/backend:${env.BUILD_ID}/g' deployment.yaml"
+                 sh "sed -i 's/backend:latestF/backend:${env.BUILD_ID}/g' deployment.yaml"
                  step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
             }
                                
             }
          stage('Deploy  front to GKE') {
             steps{
-                 sh "sed -i 's/front:latest/front:${env.BUILD_ID}/g' deployment.yaml"
+                 sh "sed -i 's/frontend:latestF/frontend:${env.BUILD_ID}/g' deployment.yaml"
                  step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
             }
                                
