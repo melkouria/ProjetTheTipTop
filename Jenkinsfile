@@ -2,7 +2,7 @@
 pipeline {
     agent any
     environment {
-        PROJECT_ID = 'regal-bonito-365811'
+        PROJECT_ID = 'elegant-beach-368817'
         CLUSTER_NAME = 'autopilot-cluster-1'
         LOCATION = 'us-central1'
         CREDENTIALS_ID = 'gcpkey'
