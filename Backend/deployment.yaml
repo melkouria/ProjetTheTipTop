@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: elkouria/projectbackend
+          image: elkouria/backend
           ports:
             - containerPort: 7777
 
