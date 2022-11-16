@@ -2,6 +2,42 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: backend-deployment
+  labels:
+    app: backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: elkouria/projectbackend
+        ports:
+        - containerPort: 7777
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+spec:
+  selector:
+    app: backend 
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 7777
+    targetPort: 7777
+    nodePort: 31160
+    
+apiVersion: apps/v1
+kind: Deployment
+metadata:
   name: frontend-deployment
   labels:
     app: frontend
@@ -35,39 +71,5 @@ spec:
     targetPort: 4100
     nodePort: 31150
 ---
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: backend-deployment
-  labels:
-    app: backend
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: backend
-  template:
-    metadata:
-      labels:
-        app: backend
-    spec:
-      containers:
-      - name: backend
-        image: elkouria/projectbackend
-        ports:
-        - containerPort: 7777
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: backend-service
-spec:
-  selector:
-    app: backend 
-  type: LoadBalancer
-  ports:
-  - protocol: TCP
-    port: 7777
-    targetPort: 7777
-    nodePort: 31160
+
     
