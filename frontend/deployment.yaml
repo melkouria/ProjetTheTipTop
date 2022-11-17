@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: front
-        image: elkouria/projectfront
+        image: elkouria/frontend
         ports:
         - containerPort: 4100
 ---
