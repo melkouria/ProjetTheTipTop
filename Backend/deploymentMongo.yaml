@@ -6,12 +6,12 @@ metadata:
   name: mongo
 spec:
   ports:
-    - port: 27017
+    - protocol: TCP
+      port: 27017
       targetPort: 27017
   selector:
     name: mongo
-    
----    
+
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -23,7 +23,6 @@ spec:
     requests:
       storage: 5Gi
   storageClassName: standard-rwo
-
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -55,4 +54,4 @@ spec:
         - name: mongo-persistent-storage
           persistentVolumeClaim:
             claimName: pvc-demo
-
+---
