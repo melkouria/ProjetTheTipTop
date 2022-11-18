@@ -11,6 +11,15 @@ spec:
       storage: 5Gi
   storageClassName: standard-rwo
 ---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mongodb
+data:
+  MONGO_INITDB_ROOT_PASSWORD: c3VwZXItc2VjcmV0LXBhc3N3b3Jk
+stringData:
+  MONGO_INITDB_ROOT_USERNAME: root
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -28,11 +37,14 @@ spec:
         name: mongo
     spec:
       containers:
-      - image: mongo:4.4.0-bionic
+      - image: mongo:5.0.13
         name: mongo
         ports:
         - name: mongo
-          containerPort: 27017  
+          containerPort: 27017
+        envFrom:
+        - secretRef:
+            name: mongodb
         volumeMounts:
             - name: mongo-persistent-storage
               mountPath: /data/db
@@ -40,4 +52,18 @@ spec:
         - name: mongo-persistent-storage
           persistentVolumeClaim:
             claimName: pvc-demo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: mongo
+  name: mongo
+spec:
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
+  selector:
+    name: mongo
 
