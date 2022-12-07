@@ -29,8 +29,9 @@ router.route('/login',cors())
 .post(userController.login);
 router.route('/dashbord')
 .get(userController.verifyToken);
-router.route('/users/:id')
+router.route('/users/:uid')
 .delete(userController.delete);
+
 
 //router.route('/users/:rid')
 //.post(userController.insertByIdRole)
@@ -73,7 +74,14 @@ router.route('/identiqueTicketq/:RefT')
 .get(userController.identiqueTicketq)
 router.route('/tickets/:tid')
 .post(ticketController.insertTicketByIdlot);
-
+router.route('/ChangerEtatUtiliseT/:Ref')
+.put(ticketController.updateEtat_utilise);
+router.route('/AfficherTicketU/')
+.get(ticketController.Ticket_etatU);
+router.route('/AfficherTicketNU/')
+.get(ticketController.Ticket_etatNU);
+router.route('/chercherUser/')
+.get(userController.search);
 router.route('/roles/')
 .get(roleController.index)
 .post(roleController.new)

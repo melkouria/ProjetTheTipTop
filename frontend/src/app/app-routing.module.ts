@@ -19,6 +19,8 @@ import { UserDashbordComponent } from './adminn/user-dashbord/user-dashbord.comp
 import { ReclamationEmployerComponent } from './adminn/reclamation-employer/reclamation-employer.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { HomeComponent } from './home/home/home.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { LogoutComponent } from './pageNotfound/logout.component';
 
 
 const routes: Routes = [
@@ -31,6 +33,7 @@ const routes: Routes = [
  {path:'login',component:LoginComponent},
  {path:'sign-up', component:SignUpComponent},
  {path:'AddEmp', component:AddempolyerComponent},
+ {path:'NumeroT',component:SidenavComponent},
  {path:'MesGains',component:DashboardClientComponent},
  {path:'Reclamation',component:UserDashbordComponent},
  {path:'ReclamationEMP',component:ReclamationEmployerComponent},
@@ -52,7 +55,7 @@ const routes: Routes = [
   {path:'Session',component:PostsComponent},
   {path:'Tirage',component:AdminComponent},
 ]},
-
+{path:'**',component:LogoutComponent},
 ]
 
 @NgModule({

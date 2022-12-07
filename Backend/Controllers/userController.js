@@ -305,17 +305,18 @@ exports.insertByIdLot = async (req,res)=>{
 }
 
 exports.delete = (req,res) =>{
-    Users.findByIdAndDelete(req.params.id,function(err,user){
+    uid=req.params.uid;
+    Users.findByIdAndDelete(uid,function(err,user){
         if(err){
             res.json({
                 status: 0,
                 message: err,
-                message: 'le id existe pas, changeé le!'
+                message: 'supprission echoue!'
             })
         }else {
             res.json({
             status: 1,
-            message: 'bravo utilisateur suprrimer',
+            message: 'votre compte est supprimer',
             data: user
         })
         }
@@ -596,7 +597,7 @@ const result = await Lots.aggregate(pipeline, options)
 
 }
 exports.sendemailsubscribed = async(req,res)=>{
-    email=req.params.email
+   const  email=req.params.email
   
     var options =  {
         'method': 'POST',
@@ -698,11 +699,7 @@ exports.emailuse= async(req,res)=>{
             
         })
     })
-}else{
-    res.json({
-         message:'error'
-      })
-    
-
+ }else{
+    console.log("ce compte n'existe pas");
 }
 }

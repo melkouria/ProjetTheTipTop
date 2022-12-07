@@ -46,6 +46,7 @@ UserRegistrationForm : FormGroup
         if(res && res['status']==='ok' && res['data']['_id']){
           swal.fire('Vérification','Sil vous plaiz verifier votre compte email','info')
           this.router.navigate(['/login'])
+          localStorage.setItem('emailUser',res['data']['email'])
         }
       })
    }

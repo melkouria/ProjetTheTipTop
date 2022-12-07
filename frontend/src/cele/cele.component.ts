@@ -16,7 +16,7 @@ export class CeleComponent implements OnInit   {
     sideBarToggler() {
       this.sideBarOpen = !this.sideBarOpen;
     }
-
+  Refp:any=localStorage.getItem('Refp');
   UserId:any = localStorage.getItem('idUser');
   NomUser:any = localStorage.getItem('nomUser');
   iscompleted1=this.service.iscompleted1;
@@ -29,6 +29,7 @@ export class CeleComponent implements OnInit   {
   ngOnInit(): void {
     this.addGainbyUser();
     this.addEtat_P();
+    this.addEtat_utiliseT();
   }
   addGainbyUser() {
     this.service.postGain(this.UserId,this.NomUser,this.Gain)
@@ -38,6 +39,12 @@ export class CeleComponent implements OnInit   {
   }
   addEtat_P() {
     this.service.postEtat_P(this.UserId)
+      .subscribe(data => {
+        console.log(data)
+      })      
+  }
+  addEtat_utiliseT() {
+    this.service.update_etatUtilastionTicket(this.Refp)
       .subscribe(data => {
         console.log(data)
       })      

@@ -125,7 +125,7 @@ export class RoueComponent implements OnInit {
  
 
   async spin() {
-   if(this.totalticket>this.conteurTicket && this.delay>0){
+   if(this.totalticket!=this.conteurTicket && this.delay>0){
       if(this.conteur1<this.calculep(60) && this.idToLandOn==0){
     await new Promise(resolve => setTimeout(resolve, 0));
     this.wheel.spin(this.idToLandOn);
@@ -163,7 +163,7 @@ export class RoueComponent implements OnInit {
   }
     }
     redirecttoaction(){
-      this.route.navigateByUrl('celebration',{skipLocationChange:true});
+      this.route.navigateByUrl('celebration',{skipLocationChange:false});
     }
     save1(){
       localStorage.setItem('counter1',this.conteur1.toString());

@@ -29,12 +29,12 @@
           <th scope="col"></th>
         </tr>
       
-        <tr *ngFor="let user of users | filter: filterTerm; index as i">
+        <tr *ngFor="let user of users | filter: filterTerm; let i = index">
           <td>{{ user._id }}</td>
           <td>{{ user.nom }}</td>
           <td>{{ user.prenom}}</td>
           <td>{{ user.email }}</td>
-          <td>{{ user.idLot[0].description}}</td>
+          <td>{{ user.idLot[i]["description"]}}</td>
           <td>{{user.Etat_obtention}}</td>
           <td><button class="button button1" (click)="addEtat_obtention(user._id)">Recu</button></td>
         </tr>

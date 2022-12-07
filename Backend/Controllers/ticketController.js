@@ -106,3 +106,54 @@ exports.AddTicketAuto = async(req,res)=>{
         message:'inserted'
     })
 }
+exports.updateEtat_utilise = async(req,res) =>{
+    const Ref = req.params.Ref;
+    var query = {
+        "ref_participation":Ref
+    };
+    const result = await Tickets.findOneAndUpdate(query,{
+        $set:{
+            utilise:true
+        }
+    })
+   result.save()
+    
+    
+    res.json({
+        data:result,
+        message:'Update etat utilise ticket'
+   
+
+    })
+
+};
+exports.Ticket_etatU=async(req,res)=>{
+    req.params.body=true;
+    const data = await Tickets.find(
+        {
+           "$or":[
+            {
+                utilise:{$in:req.params.body},
+            }
+           ]
+        }
+     
+       
+    )
+    res.send(data)
+}
+exports.Ticket_etatNU=async(req,res)=>{
+    req.params.body=false;
+    const data = await Tickets.find(
+        {
+           "$or":[
+            {
+                utilise:{$in:req.params.body},
+            }
+           ]
+        }
+     
+       
+    )
+    res.send(data)
+}

@@ -13,7 +13,10 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
    Signout(){
-      this.router.navigate(['/login']);
+      this.router.navigate(['/home']);
+      localStorage.removeItem('TokenAdmin');
+      localStorage.removeItem('TokenEmployer');
+      localStorage.removeItem('TokenUser');
    }
   toggleSideBar() {
     this.toggleSideBarForMe.emit();

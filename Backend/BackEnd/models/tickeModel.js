@@ -24,6 +24,11 @@ const userShema = mongoose.Schema({
         maxlength:50,
         unique: true
     },
+    utilise: {
+        type: Boolean,
+        default: false,
+        required:false,
+    },
   // idLot: [{type:mongoose.Schema.Types.ObjectId, ref :'Lot'}],
     //idUser: [{type: mongoose.Schema.Types.ObjectId, ref :'User'}],
     
