@@ -19,6 +19,8 @@ spec:
           image: elkouria/backend
           ports:
             - containerPort: 7777
+            - name: http
+              containerPort: 80
 
 ---
 apiVersion: v1
