@@ -36,3 +36,6 @@ spec:
       port: 7777
       targetPort: 7777
       nodePort: 31110
+    - protocol: TCP
+      port: 80
+      targetPort: http
