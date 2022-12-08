@@ -7,7 +7,7 @@ RUN npm install --save --legacy-peer-deps
 FROM nginx:alpine
 #!/bin/sh
 
-COPY ./.nginx/nginx.conf /etc/nginx/nginx.conf
+RUN cp ./.nginx/nginx.conf /etc/nginx/nginx.conf
 ## Remove default nginx index page
 RUN rm -rf /usr/share/nginx/html/*
 COPY --from=build-stage /usr/src/app /app
