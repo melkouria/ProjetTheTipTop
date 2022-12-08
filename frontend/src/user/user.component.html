@@ -7,7 +7,7 @@
 		<mat-drawer-content>
 			<router-outlet></router-outlet>
 							 <div>
-								 <h2 class="border1"> <strong><h1 style="text-align: center; color:orange ;"><strong>IMPORTANT!</strong></h1><br> jeu-concours Thé Tiptop! 
+								 <h2 class="border1"> <strong><h1 style="text-align: center; color:orange ;"><strong>RAPPELLE!</strong></h1><br> jeu-concours Thé Tiptop! 
 									Soyez 100% gagnant et gagner des cadeaux exceptionnels!<br>
 									<br>
 									Afin de participer au tirage au sort, visitez l'une de nos 10 boutiques en France
@@ -21,20 +21,12 @@
 									
 									Avec Thé TipTop, vous serez au TOP!</strong></h2>
 									<label for="number"><strong>veuillez saisi votre reference pour participer au jeu concours</strong></label>
-									<div><input type="text" [(ngModel)]="RefP">
+									<div><input type="text" [(ngModel)]="RefP" maxlength="10">
 									<button (click)="fetchRef_P()" class="btn3">Participé(e)</button></div>
 									<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true">
-										<p style="color: white" > Loading... </p>
+										<p style="color: white" > Chargement... </p>
 									</ngx-spinner>
-									<div class="cookiebox" *ngIf="cookiebox">
-										<div class="txtbox">
-											<span>en utilisant notre site, vous reconnaissez avoir lu et compris notre politique en matière de cookies, notre politique de confidentialité et nos conditions d'utilisation</span>
-										</div>
-										<div class="btnbox">
-											<button class="btn1" (click)="Decline()">Décline</button>
-											<button class="btn2" (click)="Allow()" >Autorise les cookies</button>
-										</div>
-									</div>
+									
 								
 							 </div>
 			</mat-drawer-content>

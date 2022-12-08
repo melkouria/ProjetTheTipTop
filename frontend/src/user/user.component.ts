@@ -55,25 +55,26 @@ export class UserComponent implements OnInit {
   fetchRef_P(){
     this.getRef_P()
     setTimeout(() => {
-    if(this.ref==this.RefP && this.etat_P==false){
+    if(this.ref==this.RefP && this.utilise==false){
       this.AddTicketTouser()
      this.service.loading()
       setTimeout(() => {
         
-        this.router.navigate(['/roue'])
+        this.router.navigate(['/roue'],{skipLocationChange:false})
         
       }
       , 1500);
      
     }else{
      // alert('votre Ref_Participation non valide')
-      this.toast.warning({detail:"Warning Message",summary:'votre Ref_Participation non valide',duration:5000});
+      this.toast.warning({detail:"Warning Message",summary:'votre Ref_Participation deja utilisé',duration:5000});
     }
   }
   , 1000);
   }
   public ref; 
   public user;
+  public utilise;
   public testIsvalidTicket;
  // public etat:boolean=false;
     getRef_P(){
@@ -84,6 +85,8 @@ export class UserComponent implements OnInit {
         console.log(this.testIsvalidTicket)
         if(this.testIsvalidTicket){
            this.ref=data["doc"]["ref_participation"]
+           localStorage.setItem('Refp',this.ref)
+           this.utilise=data["doc"]["utilise"]
            this.user = data["doc"]
            console.log(this.ref)
       }else{

@@ -139,7 +139,7 @@ exports.new = async (req,res,next)=>{
         subject:'The Tip Top: verifier votre email cliquez en dessous',
         html:`<h2> ${result.nom}! Merci de vous etre inscrit sur notre site </h2>
              <h4> Veuillez vérifier votre email pour continuer...</h4>
-             <a href="http://backend:7777/verify-email?token=${result.emailToken}"> Verifier Votre Email </a> `
+             <a href="http://localhost:7777/verify-email?token=${result.emailToken}"> Verifier Votre Email </a> `
      }
      transporter.sendMail(mailOptions);
      
@@ -305,17 +305,18 @@ exports.insertByIdLot = async (req,res)=>{
 }
 
 exports.delete = (req,res) =>{
-    Users.findByIdAndDelete(req.params.id,function(err,user){
+    uid=req.params.uid;
+    Users.findByIdAndDelete(uid,function(err,user){
         if(err){
             res.json({
                 status: 0,
                 message: err,
-                message: 'le id existe pas, changeé le!'
+                message: 'supprission echoue!'
             })
         }else {
             res.json({
             status: 1,
-            message: 'bravo utilisateur suprrimer',
+            message: 'votre compte est supprimer',
             data: user
         })
         }
@@ -596,7 +597,7 @@ const result = await Lots.aggregate(pipeline, options)
 
 }
 exports.sendemailsubscribed = async(req,res)=>{
-    email=req.params.email
+   const  email=req.params.email
   
     var options =  {
         'method': 'POST',
@@ -698,11 +699,7 @@ exports.emailuse= async(req,res)=>{
             
         })
     })
-}else{
-    res.json({
-         message:'error'
-      })
-    
-
+ }else{
+    console.log("ce compte n'existe pas");
 }
 }

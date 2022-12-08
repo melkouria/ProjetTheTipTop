@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { ApiAppService } from '../Service/api-app.service';
 import { Router } from '@angular/router';
@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   
   email:any;
    password :any;
+   emailUser:any=localStorage.getItem('emailUser');
   constructor(public apiApp : ApiAppService, public router : Router,private toast:NgToastService) {
     this.loginUserForm = new FormGroup ({
     email : new FormControl('' , [Validators.email , Validators.required]),
@@ -27,18 +28,21 @@ export class LoginComponent implements OnInit {
 
    
   ngOnInit(): void {
+    this.getUsers()
   }
 
   OnSubmit(){
-    if(this.loginUserForm.valid){
-      if(this.email==this.email1 && this.password==this.password1){
-        localStorage.setItem('emailAdmin',this.email)
-        this.router.navigate(['/admin'])
-      }
+    if(this.email==this.email1 && this.password==this.password1){
+      localStorage.setItem('emailAdmin',this.email)
+      localStorage.setItem('TokenAdmin','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzg2NDU4ZGRiNjIxMjlkNWM4ZWFmNzYiLCJlbWFpbCI6Im1vdXJhZGFtZWhpb3UyMEBnbWFpbC5jb20iLCJpYXQiOjE2Njk3NDQ4NjIsImV4cCI6MTY2OTc0ODQ2Mn0.zHXq0Lq-vExLSwTceuNpzt_XPWrMfVQCtHVMaUNqOAb')
+      this.router.navigate(['/admin'])
+    }
+    if(this.loginUserForm.valid && this.loginUserForm.value.email===this.taille){
+      
       this.apiApp.login(this.loginUserForm.value).subscribe(res =>{
         if(res && res['status']==='yes' && res['data']['resp'] && res['data']['AuthToken']){
           console.log('dazt')
-          localStorage.setItem('token',res['data']['AuthToken'])
+          localStorage.setItem('TokenEmployer',res['data']['AuthToken'])
           localStorage.setItem('nomEmployer',res['data']['existAdmin']['nom'])
           localStorage.setItem('prenomEmployer',res['data']['existAdmin']['prenom'])
           localStorage.setItem('emailEmployer',res['data']['existAdmin']['email'])
@@ -48,15 +52,20 @@ export class LoginComponent implements OnInit {
         }
         if(res && res['status']==='ok' && res['data']['resp'] && res['data']['AuthToken']){
           console.log('dazt')
-          localStorage.setItem('token',res['data']['AuthToken'])
+          localStorage.setItem('TokenUser',res['data']['AuthToken'])
           localStorage.setItem('idUser',res['data']['existAdmin']['_id'])
           localStorage.setItem('nomUser',res['data']['existAdmin']['nom'])
           localStorage.setItem('prenomUser',res['data']['existAdmin']['prenom'])
           localStorage.setItem('emailUser',res['data']['existAdmin']['email'])
           this.router.navigate(['/user'])
         }else{
-          this.toast.warning({detail:"Message Vérification",summary:'Sil vous plaiz verifier votre compte email',duration:5000});
-         // Swal.fire('Vérification','Sil vous plaiz verifier votre compte email','info')
+          
+          //this.toast.warning({detail:"Message Vérification",summary:'Sil vous plaiz verifier votre compte email',duration:5000});
+         Swal.fire('Vérification','Sil vous plaiz verifier votre compte email','info').then(a=>{
+          location.reload();
+         })
+          
+         
         }
         
       }, (err) =>{
@@ -66,9 +75,26 @@ export class LoginComponent implements OnInit {
         }
        } )
       }
-  console.log(this.loginUserForm.value)
+      else{
+        this.toast.info({detail:"info",summary:'Ce compte nexiste pas',duration:5000});
+       
+      }
+      //console.log(this.loginUserForm.value)
 }
-
+public users:string[];
+  public taille;
+  getUsers(){
+  
+    this.apiApp.emailused(this.emailUser)
+    .subscribe(data => {
+     
+      this.taille=data["result"][0]["email"]
+      
+      },error=>{
+        console.log(error);
+      })
+      
+    }
 onHome(){
   this.router.navigate(['/home'])
 

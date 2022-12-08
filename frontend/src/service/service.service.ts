@@ -11,7 +11,8 @@ export class ServiceService {
   public iscompleted4: boolean = false;
   public iscompleted5: boolean = false;
   public Gain: any;
-  private baseUri: string = 'http://146.148.75.158:7777';
+  //private baseUri: string = 'http://backend:7777';
+  private baseUri: string = 'http://localhost:7777';
   constructor(private http: HttpClient, public spinner: NgxSpinnerService) {}
   /*getPrixBy__v(uid:any){
     return this.http.get(this.baseUri+'/users/'+ uid);
@@ -38,6 +39,12 @@ export class ServiceService {
   search() {
     return this.http.get(this.baseUri + '/chercherUser/');
   }
+  AfficherTNU(){
+     return this.http.get(this.baseUri + '/AfficherTicketNU/')
+  }
+  AfficherTU(){
+    return this.http.get(this.baseUri + '/AfficherTicketU/')
+ }
   update_etatObtention(uid: any) {
     const headers = { 'content-type': 'application/json' };
     return this.http.put(this.baseUri + '/UpdateEtatobtention/' + uid, {
@@ -79,5 +86,14 @@ export class ServiceService {
     return this.http.post(this.baseUri + '/AddticketR/' + nombreT, {
       headers: headers,
     });
+  }
+  deleteAccount(uid:any){
+    const headers = { 'content-type': 'application/json'} 
+    return this.http.delete(this.baseUri+'/users/'+uid,{'headers':headers})
+  }
+  update_etatUtilastionTicket(Ref:any){
+    const headers = { 'content-type': 'application/json'} 
+    return this.http.put(this.baseUri+'/ChangerEtatUtiliseT/'+Ref,{'headers':headers})
+    
   }
 }

@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
-import { LogoutComponent } from './logout/logout.component';
+import { LogoutComponent } from './pageNotfound/logout.component';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations"; 
 import { RouterModule } from '@angular/router';
 import {FormsModule,ReactiveFormsModule} from "@angular/forms";
