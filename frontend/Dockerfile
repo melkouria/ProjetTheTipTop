@@ -1,21 +1,15 @@
-FROM node:latest as build-stage
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-COPY package.json /usr/src/app
+# Stage 0, "build-stage", based on Node.js, to build and compile the frontend
+FROM  node:latest as build-stage
+WORKDIR /app
+COPY package*.json /app/
 RUN npm install --save --legacy-peer-deps
-
-FROM nginx:alpine
-#!/bin/sh
-
-RUN cp ./.nginx/nginx.conf /etc/nginx/nginx.conf
-## Remove default nginx index page
-RUN rm -rf /usr/share/nginx/html/*
-COPY --from=build-stage /usr/src/app /app
-COPY . /usr/src/app
+COPY ./ /app/
+ARG configuration=production
+RUN npm run build -- --output-path=./dist/out --configuration $configuration
 EXPOSE 4100
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
-
-
-
-RUN mkdir /app
+# Stage 1, based on Nginx, to have only the compiled app, ready for production with Nginx
+FROM nginx:1.15
+COPY --from=build-stage /app/dist/out/ /usr/share/nginx/html
+# Copy the default nginx.conf provided by tiangolo/node-frontend
+COPY --from=build-stage /nginx.conf /etc/nginx/conf.d/default.conf
 
