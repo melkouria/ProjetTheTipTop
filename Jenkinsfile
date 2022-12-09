@@ -31,6 +31,7 @@ pipeline {
                 script {
                     dir('frontend'){
                     sh'docker build -t elkouria/frontend:latest .'
+                    sh 'docker login -u elkouria -p Kouria1996'    
                     }
                     
                 }
