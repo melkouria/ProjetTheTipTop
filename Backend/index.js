@@ -10,7 +10,7 @@ let port = 7777;
 
 app.use(cors());
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", "http://34.28.122.68:4100");
   res.setHeader("Access-Control-Request-Method", '"');
   res.setHeader("Access-Control-Allow-Headers", '"');
   next();
@@ -34,6 +34,7 @@ mongoose
   });
 
 app.use("/", apiRoutes);
-app.listen(port, () => {
-  console.log("Server en ligne port 7777");
+server.listen(7777, 'http://146.148.75.158'); // or server.listen(3001, '0.0.0.0'); for all interfaces
+server.on('listening', function() {
+    console.log('Express server started on port %s at %s', server.address().port, server.address().address);
 });
