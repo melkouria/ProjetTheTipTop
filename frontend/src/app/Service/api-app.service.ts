@@ -11,7 +11,7 @@ export class ApiAppService {
     return this.http.post('http://146.148.75.158:7777/login', userData);
   }
   registerUser(userData: any) {
-    return this.http.post('http://localhost:7777/users', userData);
+    return this.http.post('http://146.148.75.158:7777/users', userData);
   }
   toDashboard(token) {
     const headers = new HttpHeaders({
