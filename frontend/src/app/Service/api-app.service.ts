@@ -47,9 +47,9 @@ export class ApiAppService {
     return this.http.get('http://146.148.75.158:7777/email');
   }
   search() {
-    return this.http.get('http://localhost:7777/ChercherUserNop/');
+    return this.http.get('http://146.148.75.158:7777/ChercherUserNop/');
   }
   emailused(email: any) {
-    return this.http.get('http://localhost:7777/emailuse/' + email);
+    return this.http.get('http://146.148.75.158:7777/emailuse/' + email);
   }
 }
