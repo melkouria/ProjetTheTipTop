@@ -34,7 +34,6 @@ mongoose
   });
 
 app.use("/", apiRoutes);
-server.listen(7777, 'http://146.148.75.158'); // or server.listen(3001, '0.0.0.0'); for all interfaces
-server.on('listening', function() {
-    console.log('Express server started on port %s at %s', server.address().port, server.address().address);
+app.listen(port, () =>{
+    console.log("Server en ligne port 7777");
 });
