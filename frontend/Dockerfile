@@ -2,7 +2,7 @@
 FROM node:10.8.0 as build-stage
 WORKDIR /app
 COPY package*.json /app/
-RUN npm install
+RUN npm install --save --legacy-peer-deps
 COPY ./ /app/
 ARG configuration=production
 RUN npm run build -- --output-path=./dist/out --configuration $configuration
