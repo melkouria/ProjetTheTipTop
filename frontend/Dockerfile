@@ -1,14 +1,6 @@
-FROM node:latest as build-stage
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-COPY package.json /usr/src/app
-RUN npm install --save --legacy-peer-deps
-COPY . /usr/src/app
+FROM nginx:1.17.10-alpine
+RUN apk add nano && apk add curl
+COPY /src/index.html /usr/share/nginx/html
+RUN rm -rf /etc/nginx/conf.d/default.conf
+COPY ./nginx.conf /etc/nginx/conf.d
 EXPOSE 4100
-CMD ["npm", "start"]
-
-FROM nginx:latest
-RUN mkdir /app
-COPY --from=build-stage /usr/src/app/ /app
-COPY nginx.conf /etc/nginx/nginx.conf
-USER nginx
