@@ -33,4 +33,4 @@ spec:
     - protocol: TCP
       port: 7777
       targetPort: 7777
-      nodePort: 31110
+      nodePort: 31210
