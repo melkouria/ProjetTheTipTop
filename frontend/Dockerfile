@@ -4,8 +4,6 @@ WORKDIR /usr/src/app
 COPY package.json /usr/src/app
 RUN npm install --save --legacy-peer-deps
 COPY . /usr/src/app
-ARG configuration=production
-RUN npm run build -- --output-path=./dist/out --configuration $configuration
 
 FROM nginx:1.17.10-alpine
 RUN mkdir /app
