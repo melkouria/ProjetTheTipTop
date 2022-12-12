@@ -7,7 +7,7 @@ COPY . /usr/src/app
 
 FROM nginx:1.17.10-alpine
 RUN mkdir /app
-COPY --from=build-stage /app/dist/out/ /usr/share/nginx/html
+COPY --from=build-stage /usr/src/app /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 4100
 CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
