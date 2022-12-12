@@ -11,7 +11,7 @@ export class ServiceService {
   public iscompleted4: boolean = false;
   public iscompleted5: boolean = false;
   public Gain: any;
-  private baseUri: string = 'http://backend:7777';
+  private baseUri: string = 'http://34.71.41.44:7777';
   //private baseUri: string = 'http://localhost:7777';
   constructor(private http: HttpClient, public spinner: NgxSpinnerService) {}
   /*getPrixBy__v(uid:any){
