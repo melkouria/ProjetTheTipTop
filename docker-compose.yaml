@@ -3,14 +3,14 @@ services:
            container_name: front
            image: projectfront
            restart: always
-           build: .
+           build: frontend/
            ports:
              - '4100:4100'
        backend:
            container_name: backend
            image: projectbackend
            restart: always
-           build: .
+           build: Backend/
            ports:
              - "7777:7777"
            links:
