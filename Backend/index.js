@@ -22,7 +22,7 @@ app.use(
   })
 );
 mongoose
-  .connect("mongodb://localhost:27017/PF", {
+  .connect("mongodb://10.8.129.232:27017/PF", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
