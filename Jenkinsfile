@@ -41,9 +41,8 @@ pipeline {
               sh 'docker compose up -d --no-color --wait'
               sh 'docker compose ps'
               }
+          }
     }
-        
 
-        
-     
+       
 }
