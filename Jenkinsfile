@@ -36,6 +36,34 @@ pipeline {
                 }
             }
         }
+         stage("Push Backend image") {
+            steps {
+                script {
+                     dir('Backend'){
+                        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                           sh 'docker images'
+                           sh 'docker login -u elkouria -p Kouria1996' 
+                          sh 'docker push elkouria/backend:latest'
+              }
+                     }
+                    
+                }
+            }
+        }
+        stage("Push Frontend image") {
+            steps {
+                script {
+                     dir('frontend'){
+                        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                           sh 'docker images'
+                           sh 'docker login -u elkouria -p Kouria1996' 
+                          sh 'docker push elkouria/frontend:latest'
+              }
+                     }
+                    
+                }
+            }
+        }          
          stage('Start container') {
              steps {
               sh 'docker-compose up -d'
