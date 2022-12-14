@@ -69,5 +69,5 @@ spec:
     port: 4100
     targetPort: 4100
     nodePort: 31150
-
+---
     
