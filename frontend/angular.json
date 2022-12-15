@@ -80,6 +80,7 @@
           "configurations": {
             "production": {
               "browserTarget": "angular-wheel:build:production"
+              "disableHostCheck": true
             }
           }
         },
