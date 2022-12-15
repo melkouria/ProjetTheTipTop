@@ -13,7 +13,7 @@ export class ServiceService {
   
   public Gain: any;
   //private baseUri: string = 'http://backend:7777';
-  private baseUri: string = 'http://34.71.41.44:7777';
+  private baseUri: string = 'http://104.197.137.251:7777';
   constructor(private http: HttpClient, public spinner: NgxSpinnerService) {}
   /*getPrixBy__v(uid:any){
     return this.http.get(this.baseUri+'/users/'+ uid);
