@@ -44,7 +44,7 @@ UserRegistrationForm : FormGroup
       console.log('User form  value is ', this.UserRegistrationForm.value)
       this.apiApp.registerUser(this.UserRegistrationForm.value).subscribe(res =>{
         if(res && res['status']==='ok' && res['data']['_id']){
-          swal.fire('Vérification','Sil vous plaiz verifier votre compte email','info')
+          swal.fire('Vérification','verifier votre compte email','info')
           this.router.navigate(['/login'])
           localStorage.setItem('emailUser',res['data']['email'])
         }
