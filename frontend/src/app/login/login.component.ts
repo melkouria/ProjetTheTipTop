@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
         }else{
           
           //this.toast.warning({detail:"Message Vérification",summary:'Sil vous plaiz verifier votre compte email',duration:5000});
-         Swal.fire('Vérification','Sil vous plaiz verifier votre compte email','info').then(a=>{
+         Swal.fire('Vérification','verifier votre compte email','info').then(a=>{
           location.reload();
          })
           
