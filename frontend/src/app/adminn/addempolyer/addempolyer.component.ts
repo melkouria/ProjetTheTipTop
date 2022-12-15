@@ -37,22 +37,40 @@ UserRegistrationForm : FormGroup
   ngOnInit(): void {
     
   }
-  onSubmit() : void{
-    if(this.UserRegistrationForm.valid && this.UserRegistrationForm.value.password===this.UserRegistrationForm.value.password){
+onSubmit() : void{
+    this.getUsers()
+    setTimeout(() => {
+    if(this.UserRegistrationForm.valid && this.UserRegistrationForm.value.password===this.UserRegistrationForm.value.password && this.taille!==this.UserRegistrationForm.value.email){
+      
       console.log('User form  value is ', this.UserRegistrationForm.value)
-      this.apiApp.registerUser(this.UserRegistrationForm.value).subscribe(res =>{
-        if(res && res['status']==='ok' && res['data']['_id']){
-          swal.fire('Vérification','Sil vous plaiz verifier votre compte email','info')
-          this.router.navigate(['/login'])
+      this.apiApp.registerEMP(this.UserRegistrationForm.value).subscribe(res =>{
+        if(res && res['status']==='yes' && res['data']['_id']){
+          swal.fire('Vérification',' verifier votre compte email','info')
+          this.router.navigate(['/ReclamationEMP'])
+          localStorage.setItem('emailUser',res['data']['email'])
         }
-      } , (err) =>{
-        if(err){
-          console.log('we got in error')
-        }
-       })
-    }
+      })
+   }
     
+    else{
+      swal.fire('Vérification','Votre email est déja utilisé','warning')
+    }
+  
+  }, 1500);
   }
+  public users:string[];
+  public taille;
+  getUsers(){
+  
+    this.apiApp.emailused(this.UserRegistrationForm.value.email)
+    .subscribe(data => {
+      this.taille=data["result"][0]["email"]
+      console.log(this.taille);
+      },error=>{
+        console.log(error);
+      })
+      
+    }
   onHome(){
     this.router.navigate(['/home'])
 
