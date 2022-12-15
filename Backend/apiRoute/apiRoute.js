@@ -19,8 +19,8 @@ router.get('/' , function(req,res){
 router.route('/users/')
 .get(userController.index)
 .post(userController.new);
+router.route('/users/')
 .post(userController.newE);
-router.route('/verify-email')
 router.route('/verify-email')
 .get(userController.verifUser)
 router.route('/email/:nom/:prenom/:email/:telephone/:mesage')
