@@ -104,6 +104,50 @@ exports.verifyToken = (req,res,next) =>{
     }
 
 }
+exports.newE = async (req,res,next)=>{
+    
+    const result = await new Users({
+        nom : req.body.nom,
+        prenom : req.body.prenom,
+        genre : req.body.genre,
+        email : req.body.email,
+        telephone : req.body.telephone,
+        password : req.body.password,
+        emailToken:cryptoo.randomBytes(64).toString('hex'),
+        isAdmin:req.body.isAdmin,
+        //idRole : req.body.idRole
+
+    });
+    const salt = await bcrypt.genSalt(10)
+    await bcrypt.hash(req.body.password,salt).then(hashedPassword =>{
+        console.log('hashed password', hashedPassword)
+        result.password = hashedPassword;
+    })
+    await Users.create(result).then(userStoreData =>{
+        if(userStoreData && userStoreData._id){
+            console.log('user stored data',userStoreData)
+            res.json({status :'yes', data:userStoreData})
+        }
+        else{
+            res.json({status :'error'})
+        }
+    })
+
+      var mailOptions={
+        from:'"Verifier votre email" <mouradamehiou20@gmail.com>',
+        to:result.email,
+        subject:'The Tip Top: verifier votre email cliquez en dessous',
+        html:`<h2> ${result.nom}! Merci de vous etre inscrit sur notre site </h2>
+             <h4> Veuillez vérifier votre email pour continuer...</h4>
+             <a href="http:/localhost:7777/verify-email?token=${result.emailToken}"> Verifier Votre Email </a> `
+     }
+     transporter.sendMail(mailOptions);
+     
+     await result.save();
+     console.log(result);
+    
+    await transporter.sendMail(mailOptions);
+}
 exports.new = async (req,res,next)=>{
     
     const result = await new Users({
