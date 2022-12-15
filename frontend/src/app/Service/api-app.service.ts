@@ -13,6 +13,9 @@ export class ApiAppService {
   registerUser(userData: any) {
     return this.http.post('http://34.71.41.44:7777/users', userData);
   }
+  registerEMP(userData: any) {
+    return this.http.post('http://34.71.41.44:7777/users/EMP', userData);
+  }
   toDashboard(token) {
     const headers = new HttpHeaders({
       'Content-type': 'application/json',
