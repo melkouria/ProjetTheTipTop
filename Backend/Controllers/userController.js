@@ -139,7 +139,7 @@ exports.newE = async (req,res,next)=>{
         subject:'The Tip Top: verifier votre email cliquez en dessous',
         html:`<h2> ${result.nom}! Merci de vous etre inscrit sur notre site </h2>
              <h4> Veuillez vérifier votre email pour continuer...</h4>
-             <a href="http:/localhost:7777/verify-email?token=${result.emailToken}"> Verifier Votre Email </a> `
+             <a href="http:/34.71.41.44:7777/verify-email?token=${result.emailToken}"> Verifier Votre Email </a> `
      }
      transporter.sendMail(mailOptions);
      
@@ -183,7 +183,7 @@ exports.new = async (req,res,next)=>{
         subject:'The Tip Top: verifier votre email cliquez en dessous',
         html:`<h2> ${result.nom}! Merci de vous etre inscrit sur notre site </h2>
              <h4> Veuillez vérifier votre email pour continuer...</h4>
-             <a href="http://localhost:7777/verify-email?token=${result.emailToken}"> Verifier Votre Email </a> `
+             <a href="http://34.71.41.44:7777/verify-email?token=${result.emailToken}"> Verifier Votre Email </a> `
      }
      transporter.sendMail(mailOptions);
      
